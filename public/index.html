@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 style="text-align: center">IOT Streaming Service</h1>
+
+<div class="event-wrapper">
+    <div id="filter-container">
+        <label>
+            <input type="checkbox" id="temperature-filter" checked>
+            Temperature Events
+        </label>
+        <label>
+            <input type="checkbox" id="motion-filter" checked>
+            Motion Events
+        </label>
+        <label>
+            <input type="checkbox" id="door-filter" checked>
+            Door Events
+        </label>
+        <label>
+            <input type="checkbox" id="vibration-filter" checked>
+            Vibration Events
+        </label>
+    </div>
+    <div id="event-box">
+        <div id="notification-container"></div>
+    </div>
+</div>
+
+
+<script src="https://cdn.socket.io/4.7.3/socket.io.min.js"
+        integrity="sha384-+miq58Ltmjm+SSP5g8Ok6dpMO/6R4n8xe/x1Yj0Bdb9kiEz25LTnWv/GZQTRQamg"
+        crossorigin="anonymous"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
