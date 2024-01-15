@@ -1,7 +1,7 @@
 {
   "name": "kafka-iot-websocket-server",
   "version": "1.0.0",
-  "main": "hello.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "http": "^0.0.1-security",
     "kafka-node": "^5.0.0",
