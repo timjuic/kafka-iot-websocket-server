@@ -9,14 +9,16 @@ const topicCheckboxes = {
     motion: document.getElementById('motion-filter'),
     door: document.getElementById('door-filter'),
     vibration: document.getElementById('vibration-filter'),
+    sound: document.getElementById('vibration-filter'),
 };
 
-socket.on('event', (event) => {
+socket.on('event', (eventJson) => {
     // Filter events based on selected topics
+    let event = JSON.parse(eventJson);
+    // console.log(topicCheckboxes)
     console.log(event)
-    console.log(topicCheckboxes)
-    if (topicCheckboxes[event.type] && topicCheckboxes[event.type].checked) {
-        console.log("displaying")
+    if (topicCheckboxes[event.sensorType] && topicCheckboxes[event.sensorType].checked) {
+        // console.log("displaying")
         displayEventNotification(event);
     }
 });
@@ -26,19 +28,36 @@ function displayEventNotification(event) {
     notification.classList.add('notification');
 
     const icon = document.createElement('img');
-    icon.src = getIconUrl(event.type);
+    icon.src = getIconPath(event.sensorType);
 
     const text = document.createElement('div');
-    text.textContent = event.description;
+    text.innerHTML = event.sensorDescription;
 
     const value = document.createElement('div');
-    value.textContent = event.value;
+    value.innerHTML = event.value;
 
     notification.appendChild(icon);
     notification.appendChild(text);
     notification.appendChild(value);
 
+    console.log(notification)
     notificationContainer.insertBefore(notification, notificationContainer.firstChild);
 }
 
-// Add filter management logic here
+
+function getIconPath(eventType) {
+    switch (eventType) {
+        case 'temperature':
+            return './assets/temperature.png';
+        case 'motion':
+            return './assets/motion.png';
+        case 'door':
+            return './assets/door.png';
+        case 'vibration':
+            return './assets/vibration.png';
+        case 'sound':
+            return './assets/sound.png';
+        default:
+            return 'path/to/default-icon.png'; // Default icon for unknown types
+    }
+}

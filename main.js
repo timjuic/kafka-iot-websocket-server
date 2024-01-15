@@ -17,10 +17,11 @@ const io = socketIo(server);
 const Consumer = kafka.Consumer;
 const client = new kafka.KafkaClient({ kafkaHost: kafkaHost });
 const topics = [
-    { topic: 'temperature-data' },
-    { topic: 'motion-sensor-data' },
-    { topic: 'door-sensor-data' },
-    { topic: 'vibration-sensor-data' },
+    { topic: 'temperature' },
+    { topic: 'motion' },
+    { topic: 'door' },
+    { topic: 'vibration' },
+    { topic: 'sound' },
 ];
 const options = { autoCommit: true, groupId: 'web-interface-group' };
 const consumer = new Consumer(client, topics, options);
