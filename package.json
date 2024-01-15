@@ -1,0 +1,6 @@
+{
+  "name": "kafka-iot-websocket-server",
+  "version": "1.0.0",
+  "dependencies": {
+  }
+}
