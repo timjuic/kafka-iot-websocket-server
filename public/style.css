@@ -1,0 +1,40 @@
+/* styles.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#filter-container {
+    /* Add styles for filter management UI */
+}
+
+.event-wrapper {
+    width: 80%;
+    max-width: 1000px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#event-box {
+    height: 600px;
+    overflow-y: auto;
+    border: 2px solid #ccc;
+    padding: 10px;
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.notification img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
