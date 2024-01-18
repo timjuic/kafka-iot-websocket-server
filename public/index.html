@@ -10,12 +10,7 @@
 <h1 style="text-align: center">IOT Streaming Service</h1>
 
 <div class="event-wrapper">
-    <a href="https://www.flaticon.com/free-icons/door" title="door icons">Door icons created by Georgy - Flaticon</a>
     <div id="filter-container">
-        <label>
-            <input type="checkbox" id="temperature-filter" checked>
-            Temperature Events
-        </label>
         <label>
             <input type="checkbox" id="motion-filter" checked>
             Motion Events
@@ -28,9 +23,39 @@
             <input type="checkbox" id="vibration-filter" checked>
             Vibration Events
         </label>
+        <label>
+            <input type="checkbox" id="sound-filter" checked>
+            Sound Events
+        </label>
     </div>
     <div id="event-box">
         <div id="notification-container"></div>
+    </div>
+
+    <div class="widget-wrapper">
+        <div class="widget" id="temperature-widget">
+            <div class="widget-image widget-temperature"></div>
+            <div class="widget-info">
+                <div class="widget-text">Temperature <span class="location-info">(downstairs)</span></div>
+                <div class="widget-value" id="temperature-value">0°C</div>
+            </div>
+        </div>
+
+        <div class="widget" id="temperature-widget2">
+            <div class="widget-image widget-temperature2"></div>
+            <div class="widget-info">
+                <div class="widget-text">Temperature <span class="location-info">(upstairs)</span></div>
+                <div class="widget-value" id="temperature-value2">0°C</div>
+            </div>
+        </div>
+
+        <div class="widget" id="humidity-widget">
+            <div class="widget-image widget-humidity"></div>
+            <div class="widget-info">
+                <div class="widget-text">Humidity</div>
+                <div class="widget-value" id="humidity-value">0%</div>
+            </div>
+        </div>
     </div>
 </div>
 

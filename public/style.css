@@ -6,10 +6,6 @@ body {
     overflow: hidden;
 }
 
-#filter-container {
-    /* Add styles for filter management UI */
-}
-
 .event-wrapper {
     width: 80%;
     max-width: 1000px;
@@ -37,4 +33,58 @@ body {
     width: 30px;
     height: 30px;
     margin-right: 10px;
+}
+
+.widget-wrapper {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.widget {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.widget-image {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    width: 50px;
+    height: 50px;
+    flex: 20%;
+    border-right: 1px solid rgb(128, 128, 128);
+}
+
+.widget-temperature, .widget-temperature2 {
+    background-image: url("./assets/temperature.png");
+}
+
+.widget-humidity {
+    background-image: url("./assets/humidity.png");
+}
+
+.widget-info {
+    flex: 80%;
+    text-align: center;
+}
+
+.widget-text {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.widget-text span {
+    font-weight: normal;
+}
+
+.widget-value {
+    font-size: 18px;
+    color: #007BFF;
 }
