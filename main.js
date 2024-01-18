@@ -47,11 +47,9 @@ initializeConsumer().then(() => {
     app.use(express.json());
     app.use(express.static(path.join(__dirname, 'public')));
 
-// WebSocket Connection
     io.on('connection', (socket) => {
         console.log('A user connected');
 
-        // Send unread events to the connected user
         unreadEventsBuffer.forEach((unreadEvent) => {
             socket.emit('event', unreadEvent);
         });
@@ -62,11 +60,9 @@ initializeConsumer().then(() => {
     });
 
     consumer.on('message', (message) => {
-        io.emit('event', message.value);
-        console.log(message.value);
-
-
-        unreadEventsBuffer.push(message.value);
+        const transformedMessage = transformMessage(message.value);
+        io.emit('event', transformedMessage);
+        unreadEventsBuffer.push(transformedMessage);
     });
 
 
@@ -134,3 +130,27 @@ initializeConsumer().then(() => {
         }
     });
 })
+
+function transformMessage(jsonMessage) {
+    let message = JSON.parse(jsonMessage)
+    const sensorType = message.sensorType;
+    const value = message.value;
+
+    switch (sensorType) {
+        case 'door':
+            message.value ? message.value = 'Door was opened' : message.value = 'Door was closed'
+            break;
+        case 'sound':
+            if (value < 60) message.value = 'Noise detected'
+            else message.value = 'Loud noise detected!'
+            break;
+        case 'vibration':
+            message.value = 'Vibration detected'
+            break;
+        case 'motion':
+            message.value = "Motion detected!"
+            break;
+    }
+
+    return JSON.stringify(message)
+}

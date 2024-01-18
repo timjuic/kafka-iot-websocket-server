@@ -26,13 +26,23 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid lightgray;
 }
 
 .notification img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+    flex: 10%;
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: 20px;
+}
+
+.notification div {
+    text-align: left;
+    flex: 40%;
+}
+
+.notification div:nth-of-type(2) {
+    text-align: right;
 }
 
 .widget-wrapper {

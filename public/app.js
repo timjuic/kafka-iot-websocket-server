@@ -22,12 +22,12 @@ socket.on('event', (eventJson) => {
     }
 
     if (event.sensorType === 'temperature') {
-        if (event.sensorId === 'Temp_001') temperatureValue1.innerHTML = `${Math.round(event.temperature)}°C`
-        if (event.sensorId === 'Temp_002') temperatureValue2.innerHTML = `${Math.round(event.temperature)}°C`
+        if (event.sensorId === 'Temp_001') temperatureValue1.innerHTML = `${Math.round(event.value)}°C`
+        if (event.sensorId === 'Temp_002') temperatureValue2.innerHTML = `${Math.round(event.value)}°C`
     }
 
     if (event.sensorType === "humidity") {
-        humidityValue.innerHTML = `${Math.round(event.humidity)}%`
+        humidityValue.innerHTML = `${Math.round(event.value)}%`
     }
 });
 
