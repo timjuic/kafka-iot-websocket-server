@@ -6,20 +6,17 @@ const temperatureValue2 = document.querySelector('#temperature-widget2 .widget-i
 const humidityValue = document.querySelector('#humidity-widget .widget-info .widget-value')
 console.log("app.js loaded")
 
-// Maintain a mapping of topic checkboxes
 const topicCheckboxes = {
-    // temperature: document.getElementById('temperature-filter'),
     motion: document.getElementById('motion-filter'),
     door: document.getElementById('door-filter'),
     vibration: document.getElementById('vibration-filter'),
     sound: document.getElementById('sound-filter'),
 };
 
+
 socket.on('event', (eventJson) => {
     // Filter events based on selected topics
     let event = JSON.parse(eventJson);
-    // console.log(topicCheckboxes)
-    console.log(event)
     if (topicCheckboxes[event.sensorType] && topicCheckboxes[event.sensorType].checked) {
         displayEventNotification(event);
     }
@@ -50,12 +47,61 @@ function displayEventNotification(event) {
     notification.appendChild(icon);
     notification.appendChild(text);
     notification.appendChild(value);
-
-    console.log(notification)
     notificationContainer.insertBefore(notification, notificationContainer.firstChild);
 }
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    Object.values(topicCheckboxes).forEach(checkbox => {
+        checkbox.addEventListener('change', handleCheckboxChange);
+    });
+});
+
+initializeCheckboxes();
+
+async function initializeCheckboxes() {
+     const response = await fetch('/api/getFilterSettings');
+        if (response.ok) {
+            const filterSettings = await response.json();
+            console.log(filterSettings)
+
+            Object.keys(topicCheckboxes).forEach(checkboxId => {
+                console.log(checkboxId)
+                const checkbox = topicCheckboxes[checkboxId];
+                checkbox.checked = filterSettings[checkboxId].enabled;
+            });
+        } else {
+            console.error('Failed to fetch filter settings:', response.statusText);
+        }
+
+}
+
+async function handleCheckboxChange(event) {
+    const checkboxId = event.target.id.split('-')[0];
+    const isChecked = event.target.checked;
+    console.log('change', checkboxId)
+
+    try {
+        const response = await fetch('/api/updateFilterSettings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                event: checkboxId,
+                enabled: isChecked,
+            }),
+        });
+
+        if (response.ok) {
+            console.log(`Filter setting updated for ${checkboxId}`);
+        } else {
+            console.error('Failed to update filter setting:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error updating filter setting:', error.message);
+    }
+}
 
 
 function getIconPath(eventType) {
