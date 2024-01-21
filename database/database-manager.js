@@ -103,14 +103,12 @@ module.exports = class DatabaseManager {
         }
 
         return new Promise((resolve, reject) => {
-            // Read the script from the file
             fs.readFile(filePath, 'utf8', (readErr, script) => {
                 if (readErr) {
                     reject(readErr);
                     return;
                 }
 
-                // Execute the script
                 this.db.exec(script, (scriptErr) => {
                     if (scriptErr) {
                         reject(scriptErr);

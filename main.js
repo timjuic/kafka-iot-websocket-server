@@ -7,7 +7,6 @@ const FilterSettingDAO = require('./database/filter-setting-repo')
 require('dotenv').config();
 
 const kafkaHost = process.env.KAFKA_BROKER || 'localhost:9092';
-const dbPath = './database/database.db'
 
 const app = express();
 const server = app.listen(3000, () => {
@@ -35,7 +34,6 @@ async function getTopicsFromDatabase() {
 
 async function initializeConsumer() {
     activeTopics = await getTopicsFromDatabase();
-
     const options = { autoCommit: true, groupId: 'web-interface-group' };
     console.log(activeTopics)
     consumer = new Consumer(client, activeTopics, options);
@@ -72,14 +70,12 @@ initializeConsumer().then(() => {
 
     process.on('SIGINT', () => {
         console.log('Server shutting down');
-        // Add any cleanup logic here
         process.exit();
     });
 
 
     app.post('/api/updateFilterSettings', async (req, res) => {
         const { event, enabled } = req.body;
-        console.log("updated", event, enabled);
 
         try {
             await filterRepo.updateFilterSetting(event, enabled);

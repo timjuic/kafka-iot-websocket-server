@@ -15,7 +15,6 @@ const topicCheckboxes = {
 
 
 socket.on('event', (eventJson) => {
-    // Filter events based on selected topics
     let event = JSON.parse(eventJson);
     if (topicCheckboxes[event.sensorType] && topicCheckboxes[event.sensorType].checked) {
         displayEventNotification(event);
